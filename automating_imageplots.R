@@ -63,7 +63,7 @@ plotmyimages<-function(prefix){
 ##First set your path to the directory where your images are held, this can be a master folder
 ##we will use regular expressions + prefixes of file names to direct to the specific images we want in the table
 
-path = "~/Documents/BradyLab/ST_Images/"
+path = "~/Documents/Images"
 #fill the quotes in with the path to your images
 
 setwd(path)
@@ -84,8 +84,12 @@ for (prefix in prefixlist){
   plotmyimages(prefix)
 }
 
-
 #Now you have a plot for each prefix in prefix list in your image folder
+
+
+
+
+######  Getting these plots into a larger table plot  #####
 
 
 ##Each prefix in this list has saved as an individual file
@@ -101,7 +105,6 @@ allmyimages<-sapply(prefixlist, function(prefix) {
   #and then we can add each of these pdf plots to our list called allmyimages
 }
 )
-
 
 ##for some reason sapply will only save this as a list of lists
 ##magick won't work with these objects so we have to force it to a normal list
