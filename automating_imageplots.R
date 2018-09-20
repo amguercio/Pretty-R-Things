@@ -32,7 +32,7 @@ path = "~/Documents/Images"
 prefixlist<-c("SQR_2N_CTR", "SQR_2N_Striga", "SQR_2S_CTR", "SQR_2S_Striga", "SRN39_2N_CTR", "SRN39_2N_Striga", "SRN39_2S_CTR", "SRN39_2S_Striga")
 #make your list and save it as prefixlist (enter all prefixes in quote separated by commas)
 
-
+##### OPTIONAL  #####
 ##If you want to utilize the final functionality of the script under ######  Getting these plots into a larger table plot  #####
 ##Here there are indicators of 
 ######     vvvvvUSER NEEDS TO EDITvvvvvv     #####
@@ -106,6 +106,8 @@ for (prefix in prefixlist){
 
 
 ######  Getting these plots into a larger table plot  #####
+
+######  OPTIONAL  + REQUIRES USER INPUT ######
 
 
 ##Each prefix in this list has saved as an individual file
