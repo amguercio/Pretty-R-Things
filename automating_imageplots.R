@@ -1,21 +1,48 @@
+##automating_imageplots.R
+
 ##Script for automating putting images into a table
 
-
-#Libraries to install/load
-library(ggplot2)
-library(gridExtra)
-library(grid)
-library(cowplot)
-library(magick)
-library(tiff)
-library(jpeg)
-library(stringr)
-library(pdftools)
+##amiriamguercio  (Angelica Guercio) 2018
 
 ##A function to plot your images, given a prefix for the filenames you wish to plot
 ##default plots these as one row (in order within that row left to right)
 ##output is a pdf file with the name prefix.pdf and the left label of the prefix
 ##default input is .tiff format files
+
+
+
+##### Installing/Loading Required Libraries #####
+
+if (!require(“pacman”)) install.packages(“pacman”)
+pacman::p_load(ggplot2, gridExtra, grid, cowplot, magick, tiff, jpeg, stringr, pdftools)
+
+
+
+######  User Inputs ######
+
+#Define the path of where your images are located
+path = "~/Documents/Images"
+#fill the quotes in with the path to your images
+
+##Define the prefixes of the filenames of the images you would like to plot.
+#No need to put the entire file name, just the prefix, all images with this prefix will be plotted
+#Outfiles will be named prefix.pdf and be located in the image folder
+prefixlist<-c("SQR_2N_CTR", "SQR_2N_Striga", "SQR_2S_CTR", "SQR_2S_Striga", "SRN39_2N_CTR", "SRN39_2N_Striga", "SRN39_2S_CTR", "SRN39_2S_Striga")
+#make your list and save it as prefixlist (enter all prefixes in quote separated by commas)
+
+
+##If you want to utilize the final functionality of the script under ######  Getting these plots into a larger table plot  #####
+##Here there are indicators of 
+######     vvvvvUSER NEEDS TO EDITvvvvvv     #####
+
+#allmyimages<-c(allmyimages[[1]], allmyimages[[2]], allmyimages[[3]], allmyimages[[4]], allmyimages[[5]], allmyimages[[6]], allmyimages[[7]], allmyimages[[8]])
+
+######     ^^^^^USER NEEDS TO EDIT^^^^^     #####
+
+#this allmyimages definition depends on the length of your prefixlist, which you can find with 
+length(prefixlist)
+#if length(prefixlist) is i:
+#You will need to edit this **IN THE SCRIPT** such that you are calling on allmyimages<-c(allmyimages[[1]], ...., allmyimages[[i]])
 
 
 
@@ -59,32 +86,19 @@ plotmyimages<-function(prefix){
 
 ##### Running plotmyimages Function ######
 
-
-##First set your path to the directory where your images are held, this can be a master folder
-##we will use regular expressions + prefixes of file names to direct to the specific images we want in the table
-
-path = "~/Documents/Images"
-#fill the quotes in with the path to your images
-
+#Before running the function we should make sure our working directory is the path we defined as where the images are contained
 setwd(path)
 #let's set our wd to this path 
 
 
-##When calling the function, you need to give it the prefix you wish to look for to plot these images
-##To make it easy, you can make a list of these prefixes--each will save as an individual file
-
-
-prefixlist<-c("SQR_2N_CTR", "SQR_2N_Striga", "SQR_2S_CTR", "SQR_2S_Striga", "SRN39_2N_CTR", "SRN39_2N_Striga", "SRN39_2S_CTR", "SRN39_2S_Striga")
-#make your list and save it as prefixlist (enter all prefixes in quote separated by commas)
-
-
-##Now let's run the plotmyimages function over all prefixes in our prefix list
+##Now let's run the plotmyimages function over all prefixes in the prefix list you have given 
 for (prefix in prefixlist){
   #this is a loop, that applies the plotmyimages function over each prefix in your provided prefixlist
   plotmyimages(prefix)
 }
 
 #Now you have a plot for each prefix in prefix list in your image folder
+
 
 
 
@@ -106,29 +120,36 @@ allmyimages<-sapply(prefixlist, function(prefix) {
 }
 )
 
+
+
 ##for some reason sapply will only save this as a list of lists
 ##magick won't work with these objects so we have to force it to a normal list
-
 ##to do this make sure you get
-length(prefixlist)
 
 #once you have the length just force allmyimages to be a literal list 
 #to do call on each element of the list 1-i of length i 
+
+
+######     vvvvvUSER NEEDS TO EDITvvvvvv     #####
+
 allmyimages<-c(allmyimages[[1]], allmyimages[[2]], allmyimages[[3]], allmyimages[[4]], allmyimages[[5]], allmyimages[[6]], allmyimages[[7]], allmyimages[[8]])
 
-#let's take a look--now it's a list so the viewer will plot one image after another
+######     ^^^^^USER NEEDS TO EDIT^^^^^     #####
+
+
+
+#You can take a look--now it's a list so R studio viewer will plot one image after another
 allmyimages
 #let's make it look like a real table
 
 final_plot<-image_append(image_scale(allmyimages), stack=TRUE)
 #if you want the images side by side, stack = F, if you want them vertically stacked stack = T
 
-#let's take a look
+#You can take a look at the finished product
 plot(final_plot)
 
 
 #great! now let's save it to a pdf (or your file of choice)
-
 
 pdf("finalplot.pdf")
 plot(final_plot)
