@@ -60,7 +60,7 @@ plotmyimages<-function(prefix){
   prefixmatches<-dir(path, pattern = searchpattern)
   #we want to exclude any file containing'.pdf'
   #you can copy this line below to exclude more patterns from your prefixmatches list
-  prefixmatches<-prefixmatches[!str_detect(prefix, pattern="pdf")]
+  prefixmatches<-prefixmatches[!str_detect(prefixmatches, pattern="pdf")]
   #below is a small nested function to take each prefix match and read and draw the image 
   #into a list called imagelist
   imagelist<-lapply(prefixmatches, function(file) {
