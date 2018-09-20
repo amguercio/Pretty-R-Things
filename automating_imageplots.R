@@ -12,9 +12,10 @@
 
 
 ##### Installing/Loading Required Libraries #####
-
-if (!require(“pacman”)) install.packages(“pacman”)
+install.packages(“pacman”)
+#pacman is a package manager
 pacman::p_load(ggplot2, gridExtra, grid, cowplot, magick, tiff, jpeg, stringr, pdftools)
+#this will load (or install if necessary) all of these packages
 
 
 
