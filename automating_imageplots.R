@@ -4,10 +4,11 @@
 
 ##amiriamguercio  (Angelica Guercio) 2018
 
-##A function to plot your images, given a prefix for the filenames you wish to plot
-##default plots these as one row (in order within that row left to right)
-##output is a pdf file with the name prefix.pdf and the left label of the prefix
-##default input is .tiff format files
+##A function to plot your images, given a prefixes for the filenames you wish to plot
+##default plots all files with the same prefix as one row (in order within that row left to right), you can change the row/col layout
+##output is a pdf file named prefix.pdf of this plot with a left label of "prefix"
+##the end of the script provides a way to plot multiple prefix plots into one larger table-like figure
+##default input is .tiff format files but .jpeg and others can be used as well with minor modifications
 
 
 
@@ -26,7 +27,7 @@ path = "~/Documents/Images"
 #fill the quotes in with the path to your images
 
 ##Define the prefixes of the filenames of the images you would like to plot.
-#No need to put the entire file name, just the prefix, all images with this prefix will be plotted
+#No need to put the entire file name, just the prefix, all images with this prefix will be plotted (regex will search for prefix*)
 #Outfiles will be named prefix.pdf and be located in the image folder
 prefixlist<-c("SQR_2N_CTR", "SQR_2N_Striga", "SQR_2S_CTR", "SQR_2S_Striga", "SRN39_2N_CTR", "SRN39_2N_Striga", "SRN39_2S_CTR", "SRN39_2S_Striga")
 #make your list and save it as prefixlist (enter all prefixes in quote separated by commas)
